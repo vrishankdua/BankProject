@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <nav>
+      <button onclick="showForm('register')">Register</button>
+      <button onclick="showForm('edit')">Edit</button>
+      <button onclick="showForm('delete')">Delete</button>
+      <button onclick="showForm('transaction')">Transaction</button>
+      <button onclick="showForm('loan')">Loan</button>
+    </nav>
+
+    <div class="container" id="registerForm">
+      <h2>New Customer Registration</h2>
+      <form onsubmit="return handleRegister(event)">
+        <input type="text" placeholder="Customer SSN ID" required />
+        <input type="text" placeholder="Customer Name" required />
+        <input type="text" placeholder="Account Number" required />
+        <input type="text" placeholder="IFSC Code" required />
+        <input type="number" placeholder="Account Balance" required />
+        <input type="text" placeholder="Aadhaar Card No" required />
+        <input type="text" placeholder="PAN Card No" required />
+        <input type="date" placeholder="Date of Birth" required />
+        <select required>
+          <option value="">Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <select required>
+          <option value="">Marital Status</option>
+          <option>Single</option>
+          <option>Married</option>
+        </select>
+        <input type="email" placeholder="Email" required />
+        <input type="text" placeholder="Address" required />
+        <input type="text" placeholder="Contact Number" required />
+        <div class="full-width">
+          <button type="submit">Register Customer</button>
+        </div>
+      </form>
+      <div id="registerMsg" class="message" style="display: none"></div>
+    </div>
+
+    <div class="container" id="editForm" style="display: none">
+      <h2>Edit Customer Information</h2>
+      <form onsubmit="return handleEdit(event)">
+        <input
+          type="text"
+          id="editSsn"
+          placeholder="Customer SSN ID"
+          required
+        />
+        <button type="button" onclick="searchCustomer()">Search</button>
+
+        <input type="text" id="editName" placeholder="Customer Name" required />
+        <input
+          type="text"
+          id="editAccount"
+          placeholder="Account Number"
+          required
+        />
+        <input type="text" id="editIFSC" placeholder="IFSC Code" required />
+        <input
+          type="number"
+          id="editBalance"
+          placeholder="Account Balance"
+          required
+        />
+        <input
+          type="text"
+          id="editAadhaar"
+          placeholder="Aadhaar Card No"
+          required
+        />
+        <input type="text" id="editPAN" placeholder="PAN Card No" required />
+        <input type="date" id="editDOB" placeholder="Date of Birth" required />
+        <select id="editGender" required>
+          <option value="">Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <select id="editMarital" required>
+          <option value="">Marital Status</option>
+          <option>Single</option>
+          <option>Married</option>
+        </select>
+        <input type="email" id="editEmail" placeholder="Email" required />
+        <input type="text" id="editAddress" placeholder="Address" required />
+        <input
+          type="text"
+          id="editContact"
+          placeholder="Contact Number"
+          required
+        />
+        <div class="full-width">
+          <button type="submit">Update Customer</button>
+        </div>
+      </form>
+      <div id="editMsg" class="message" style="display: none"></div>
+    </div>
+
+    <div class="container" id="deleteForm" style="display: none">
+      <h2>Delete Customer</h2>
+      <form onsubmit="return false;">
+        <input
+          type="text"
+          id="deleteSsn"
+          placeholder="Customer SSN ID"
+          required
+        />
+        <button type="button" onclick="searchCustomerToDelete()">Search</button>
+      </form>
+
+      <div id="customerDetails" style="display: none; margin-top: 20px">
+        <h3>Customer Details</h3>
+        <p id="customerInfo"></p>
+        <button onclick="confirmDelete()">Confirm Delete</button>
+      </div>
+
+      <div id="deleteMsg" class="message" style="display: none"></div>
+    </div>
+
+    <div class="container" id="transactionForm" style="display: none">
+      <h2>Capture Transaction</h2>
+      <form onsubmit="return handleTransaction(event)">
+        <input type="text" placeholder="Transaction ID" required />
+        <input type="text" placeholder="Customer SSN ID" required />
+        <input type="text" placeholder="Customer Name" required />
+        <input type="text" placeholder="Account ID" required />
+        <input type="text" placeholder="Aadhaar Card No" required />
+        <input type="text" placeholder="PAN Card No" required />
+        <input type="text" placeholder="Address" required />
+        <input type="date" placeholder="Date" required />
+        <input type="text" placeholder="Contact Number" required />
+        <input type="text" placeholder="Mode of Transaction" required />
+        <input type="number" placeholder="Amount of Transaction" required />
+        <select required>
+          <option value="">Credit / Debit</option>
+          <option>Credit</option>
+          <option>Debit</option>
+        </select>
+        <div class="full-width">
+          <button type="submit">Submit Transaction</button>
+        </div>
+      </form>
+      <div id="transactionMsg" class="message" style="display: none"></div>
+    </div>
+
+    <div class="container" id="loanForm" style="display: none">
+      <h2>Initiate Loan Request</h2>
+      <form onsubmit="return handleLoan(event)">
+        <input type="text" placeholder="Customer SSN ID" required />
+        <input type="text" placeholder="Customer Name" required />
+        <input type="text" placeholder="Occupation" required />
+        <input type="text" placeholder="Employer Name" required />
+        <input type="text" placeholder="Employer Address" required />
+        <input type="email" placeholder="Email" required />
+        <input type="text" placeholder="Address" required />
+        <select required>
+          <option value="">Marital Status</option>
+          <option>Single</option>
+          <option>Married</option>
+        </select>
+        <input type="text" placeholder="Contact Number" required />
+        <input type="number" placeholder="Loan Amount" required />
+        <input
+          type="number"
+          placeholder="Length of Loan (Duration in months)"
+          required
+        />
+        <div class="full-width">
+          <button type="submit">Request Loan</button>
+        </div>
+      </form>
+      <div id="loanMsg" class="message" style="display: none"></div>
+    </div>
+  </body>
+</html>
