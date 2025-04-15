@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bank Employee Login - GreenTrust Bank</title>
+  <style>
+    :root {
+      --green-light: #a8e6a3;
+      --green-bright: #66bb6a;
+      --green-dark: #4caf50;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--green-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header, footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .login-button {
+      padding: 10px 20px;
+      background-color: var(--white);
+      color: var(--green-dark);
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .login-button:hover {
+      background-color: white;
+      transform: scale(1.05);
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 100, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+      margin: 60px auto;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      color: var(--green-dark);
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 20px;
+      color: #34495e;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    button[type="submit"],
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--green-dark);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--green-bright);
+    }
+
+    .signup-text {
+      margin-top: 20px;
+      text-align: center;
+      color: #555;
+    }
+
+    footer {
+      margin-top: auto;
+      flex-direction: column;
+      text-align: center;
+      font-size: 14px;
+      padding: 30px;
+    }
+
+    .footer-info {
+      margin-top: 10px;
+    }
+
+    .footer-info p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 600px) {
+      header, footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .login-button {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GreenTrust Bank</h1>
+    <button class="login-button" onclick="Redirect()">Home</button>
+  </header>
+
+  <div class="login-container">
+    <h2>Employee Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="signup-text">Don't have an account?</div>
+    <button class="signup-btn" onclick="redirectToSignUp()">Sign Up</button>
+  </div>
+
+  <footer>
+    <div>&copy; 2025 GreenTrust Bank. All rights reserved.</div>
+    <div class="footer-info">
+      <p>📍 Address: 123 Green Lane, Eco City, IN 560001</p>
+      <p>📞 Phone: +91-9876543210</p>
+      <p>✉️ Email: support@greentrustbank.com</p>
+    </div>
+  </footer>
+
+  <script>
+    function Redirect() {
+      window.location.href = "./Home.html";
+    }
+
+    function redirectToSignUp() {
+      window.location.href = './EmpSignup.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get form data
+      const enteredUsername = document.getElementById('username').value;
+      const enteredPassword = document.getElementById('password').value;
+
+      // Get employee data from localStorage
+      const storedEmployeeData = JSON.parse(localStorage.getItem('employeeData'));
+
+      // Validate credentials
+      if (storedEmployeeData) {
+        if (enteredUsername === storedEmployeeData.username && enteredPassword === storedEmployeeData.password) {
+          alert("Login Successful");
+          window.location.href = "EmployeeReg.html"; // Redirect to employee dashboard
+        } else {
+          alert("Invalid credentials. Please try again.");
+        }
+      } else {
+        alert("No employee found. Please sign up first.");
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const enteredUsername = document.getElementById('username').value;
+  const enteredPassword = document.getElementById('password').value;
+
+  const storedData = JSON.parse(localStorage.getItem('employeeData'));
+
+  if (storedData && enteredUsername === storedData.username && enteredPassword === storedData.password) {
+    localStorage.setItem('isLoggedIn', true);
+    alert("Login Successful");
+    window.location.href = "EmployeeReg.html"; // or any protected employee page
+  } else {
+    alert("Invalid credentials. Please try again.");
+  }
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Registration - GreenTrust Bank</title>
+  <style>
+    :root {
+      --green-light: #a8e6a3;
+      --green-dark: #4caf50;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--green-light);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    .registration-form {
+      background-color: var(--white);
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-field {
+      margin-bottom: 15px;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .form-field input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .form-field input[type="submit"] {
+      background-color: var(--green-dark);
+      color: var(--white);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-field input[type="submit"]:hover {
+      background-color: #66bb6a;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--green-dark);
+    }
+
+    footer p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GreenTrust Bank</h1>
+    <p>Employee Registration</p>
+  </header>
+
+  <div class="registration-form">
+    <form id="employeeForm" onsubmit="registerEmployee(event)">
+      <div class="form-field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form-field">
+        <input type="submit" value="Register" />
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 GreenTrust Bank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Function to handle registration form submission
+    function registerEmployee(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  // Store employee data as object in localStorage
+  const employeeData = {
+    name,
+    email,
+    username,
+    password
+  };
+
+  localStorage.setItem("employeeData", JSON.stringify(employeeData));
+
+  alert("Registration successful! Please log in.");
+  window.location.href = "./EmployeeLogin.html";
+}
+
+
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  // Get entered credentials
+  const empUsername = document.getElementById('empUsername').value;
+  const empPassword = document.getElementById('empPassword').value;
+
+  // Retrieve stored credentials from localStorage
+  const storedUsername = localStorage.getItem('employeeUsername');
+  const storedPassword = localStorage.getItem('employeePassword');
+
+  // Check if credentials match
+  if (empUsername === storedUsername && empPassword === storedPassword) {
+    // Set login flag in localStorage
+    localStorage.setItem('isLoggedIn', true);
+
+    // Redirect to Employee page
+    alert("Login Successful");
+    window.location.href = "EmployeeReg.html";
+  } else {
+    alert("Invalid credentials. Please try again.");
+  }
+});
+
+window.onload = function () {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+  if (!isLoggedIn) {
+    window.location.href = "EmployeeLogin.html";  // Redirect to login if not logged in
+  }
+};
+
+  </script>
+</body>
+</html>

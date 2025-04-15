@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bank Management System</title>
+  <style>
+    :root {
+      --green-light: #a8e6a3;
+      --green-bright: #66bb6a;
+      --green-dark: #4caf50;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--green-light);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header, footer {
+      background-color: var(--green-dark);
+      color: var(--white);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .login-button {
+      padding: 10px 20px;
+      background-color: var(--white);
+      color: var(--green-dark);
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .login-button:hover {
+      background-color: #d6f5d6;
+      transform: scale(1.05);
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: var(--white);
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .typewriter h2 {
+      font-size: 36px;
+      color: var(--green-dark);
+      overflow: hidden;
+      border-right: 3px solid var(--green-dark);
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 2px;
+      animation: typing 4s steps(35, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--green-dark) }
+    }
+
+    .main p {
+      font-size: 18px;
+      max-width: 700px;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    .svg-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .svg-background svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    .content {
+      z-index: 1;
+    }
+
+    footer {
+      flex-direction: column;
+      text-align: center;
+      font-size: 14px;
+      padding: 30px;
+    }
+
+    .footer-info {
+      margin-top: 10px;
+    }
+
+    .footer-info p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 600px) {
+      header, footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .login-button {
+        margin-top: 10px;
+      }
+
+      .typewriter h2 {
+        font-size: 28px;
+      }
+
+      .main p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>GreenTrust Bank</h1>
+    <button class="login-button" onclick="Redirect()">Login</button>
+  </header>
+
+  <div class="main">
+    <div class="svg-background">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
+        <!-- Bright Green Wave -->
+        <path fill="#66bb6a" fill-opacity="1" d="M0,320L60,293.3C120,267,240,213,360,186.7C480,160,600,160,720,176C840,192,960,224,1080,229.3C1200,235,1320,213,1380,202.7L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+        <!-- White Wave Layer -->
+        <path fill="#ffffff" fill-opacity="0.9" d="M0,480L60,453.3C120,427,240,373,360,346.7C480,320,600,320,720,336C840,352,960,384,1080,389.3C1200,395,1320,373,1380,362.7L1440,352L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+      </svg>
+    </div>
+
+    <div class="content">
+      <div class="typewriter">
+        <h2>Welcome to GreenTrust Bank</h2>
+      </div>
+      <p>Manage your finances with confidence. Our secure banking system provides everything you need to control your accounts, transfer funds, and much more.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div>&copy; 2025 GreenTrust Bank. All rights reserved.</div>
+    <div class="footer-info">
+      <p>📍 Address: 123 Green Lane, Eco City, IN 560001</p>
+      <p>📞 Phone: +91-9876543210</p>
+      <p>✉️ Email: support@greentrustbank.com</p>
+    </div>
+  </footer>
+
+  <script>
+    function Redirect() {
+  // Storing the login attempt in localStorage
+  localStorage.setItem("loginAttempted", "true");
+  
+  // Redirecting to the login options page
+  window.location.href = "./loginoption.html";
+}
+
+  </script>
+</body>
+</html>
